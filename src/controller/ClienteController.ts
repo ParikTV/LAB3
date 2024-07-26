@@ -39,12 +39,14 @@ export class ClienteController {
     };
 
     static create = async (req: Request, res: Response) => {
-        const { ruc_cliente, nombre_cliente, direccion_cliente } = req.body;
+        const { ruc_cliente, nombres_cliente, apellidos_cliente, direccion_cliente, telefono_cliente } = req.body;
 
         const cliente = new Cliente();
         cliente.ruc_cliente = ruc_cliente;
-        cliente.nombres_cliente = nombre_cliente;
+        cliente.nombres_cliente = nombres_cliente;
+        cliente.apellidos_cliente = apellidos_cliente;
         cliente.direccion_cliente = direccion_cliente;
+        cliente.telefono_cliente = telefono_cliente;
 
         const errors = await validate(cliente);
         if (errors.length > 0) {
@@ -71,14 +73,16 @@ export class ClienteController {
 
     static update = async (req: Request, res: Response) => {
         const { id } = req.params;
-        const { nombre_cliente, direccion_cliente } = req.body;
+        const { nombres_cliente, apellidos_cliente, direccion_cliente, telefono_cliente } = req.body;
 
         const clienteRepository = AppDataSource.getRepository(Cliente);
         try {
             const cliente = await clienteRepository.findOneBy({ ruc_cliente: id });
             if (cliente) {
-                cliente.nombres_cliente = nombre_cliente;
+                cliente.nombres_cliente = nombres_cliente;
+                cliente.apellidos_cliente = apellidos_cliente;
                 cliente.direccion_cliente = direccion_cliente;
+                cliente.telefono_cliente = telefono_cliente;
 
                 const errors = await validate(cliente);
                 if (errors.length > 0) {

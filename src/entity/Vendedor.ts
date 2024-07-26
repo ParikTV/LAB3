@@ -21,20 +21,20 @@ export class Vendedor {
     @IsNotEmpty({ message: "El apellido del vendedor no puede estar vacío" })
     apellidos_vendedor: string;
 
-    @Column()
+    @Column({ nullable: true })
     @IsString({ message: "La dirección del vendedor debe ser una cadena de caracteres" })
     @IsOptional()
-    direccion_vendedor: string;
+    direccion_vendedor?: string;
 
-    @Column()
+    @Column({ nullable: true })
     @IsString({ message: "El teléfono del vendedor debe ser una cadena de caracteres" })
     @IsOptional()
-    telefono_vendedor: string;
+    telefono_vendedor?: string;
 
-    @Column()
+    @Column({ nullable: true })
     @IsString({ message: "El celular del vendedor debe ser una cadena de caracteres" })
     @IsOptional()
-    celular_vendedor: string;
+    celular_vendedor?: string;
 
     @OneToMany(() => CabeceraFactura, factura => factura.vendedor)
     facturas: CabeceraFactura[];
